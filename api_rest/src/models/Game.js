@@ -13,7 +13,12 @@ const Game = Connection.define("games", {
     description: {
         type: Sequelize.TEXT,
         allowNull: false,
+    },
+    slug: {
+        type: Sequelize.TEXT,
+        allowNull: false
     }
+
 });
 
 module.exports = Game;

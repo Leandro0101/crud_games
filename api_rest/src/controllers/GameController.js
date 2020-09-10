@@ -1,10 +1,16 @@
 const Game = require("../models/Game");
-
+const gameSchema = require('../validations/GameSchema');
 module.exports = {
     async store(req, res) {
-        const game = await Game.create(req.body);
+        try {
+            const data = await gameSchema.validateAsync(req.body);
 
-        res.status(200).json(game);
+            const game = await Game.create(data);
+
+            res.status(201).json(game);
+        }catch(err){
+            res.status(400).json({ error: err.details });
+        }
     },
     async index(req, res) {
         const games = await Game.findAll({ order: [["id", "DESC"]] });
