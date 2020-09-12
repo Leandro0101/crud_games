@@ -1,21 +1,36 @@
-const Sequelize = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const Connection = require("../database");
 
 const Game = Connection.define("games", {
     title: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
+        unique: true,
+        validate: {
+            isLowercase: true,
+            notNull: true,
+            notEmpty: true,
+        }
     },
     price: {
-        type: Sequelize.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: false,
+        validate: {
+            isInt: true,
+            notNull: true,
+        }
     },
     description: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
+        validate: {
+            isInt: true,
+            notNull: true,
+            notEmpty: true,
+        }
     },
     slug: {
-        type: Sequelize.TEXT,
+        type: DataTypes.STRING,
         allowNull: false
     }
 
