@@ -13,5 +13,9 @@ module.exports = {
         } catch (err) {
             res.status(400).json(err);
         }
+    },
+     async getUser(email){
+        const user = await User.findOne({ where:  { email } });
+        return user;
     }
 }
